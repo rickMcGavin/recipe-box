@@ -8,6 +8,9 @@ import Recipe from './recipe';
 		});
 	})()}
 </ul>
+
+
+{this.state.edit ? this.renderEdit() : this.renderRecipes()}
 */
 
 
@@ -23,7 +26,7 @@ class RecipesContainer extends Component {
 
 		this.state = { 
 			recipes: {},
-			edit: true
+			edit: false
 		}
 	}
 
@@ -69,7 +72,12 @@ class RecipesContainer extends Component {
 				{
 					Object
 					.keys(this.state.recipes)
-					.map(key => <Recipe onEdit={this.onEdit} key={key} details={this.state.recipes[key]} />)
+					.map(key => {
+						console.log(key);
+						
+						<Recipe onEdit={this.onEdit} key={key} details={this.state.recipes[key]} />
+
+					})
 				}
 			</ul>
 		);
@@ -92,7 +100,9 @@ class RecipesContainer extends Component {
 				</div>
 				<div className="container">
 					<div className="well">
-							{this.state.edit ? this.renderEdit() : this.renderRecipes()}
+						<ul>
+							{this.renderRecipes()}
+						</ul>
 					</div>
 				</div>
 			</div>
