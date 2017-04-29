@@ -1,18 +1,23 @@
 import React from 'react';
 
-const Recipe = () => {
+const Recipe = (props) => {
 	return (
-		<li className="list-group-item">Cheddar Soup
-			<ul>
-				<li>Cheese</li>
-				<li>Broth</li>
-				<li>Milk</li>
-			</ul>
-			<div className="button-group">
-				<div className="btn btn-warning">Edit</div>
-				<div className="btn btn-danger">Delete</div>
-			</div>
-	</li>
+			<li className="list-group-item">
+				<h4>
+					{props.details.recipe}
+				</h4>
+				<ul>
+					{
+						props.details.ingredients.map((item, index) => {
+							return <li key={index}>{item}</li>
+						})
+					}
+				</ul>
+				<div className="button-group">
+					<div onClick={props.onEdit} className="btn btn-warning">Edit</div>
+					<div className="btn btn-danger">Delete</div>
+				</div>
+			</li>
 	)
 }
 

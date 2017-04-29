@@ -1,39 +1,83 @@
 import React, { Component } from 'react';
 import Recipe from './recipe';
 
+/*<ul>
+	{(() => { 
+		return this.state.ingredients.map((item, index) => {
+			return <li key={index}>{item}</li>
+		});
+	})()}
+</ul>
+*/
+
+
 class RecipesContainer extends Component {
 	constructor(props) {
 		super(props);
 
 		this.addRecipe = this.addRecipe.bind(this);
-		this.state = { recipes: [],
-									 ingredients: [] }
+		this.renderEdit = this.renderEdit.bind(this);
+		this.renderRecipes = this.renderRecipes.bind(this);
+		this.onSave = this.onSave.bind(this);
+		this.onEdit = this.onEdit.bind(this);
+
+		this.state = { 
+			recipes: {},
+			edit: true
+		}
 	}
 
-	addRecipe() {
-		const title = 'Fish';
-		const ingredient = 'water,fish,oil'.split(',');
-		this.setState({ recipes: [...this.state.recipes, title]});
-		this.setState({ ingredients: [...this.state.ingredients, ingredient]});
+	addRecipe(recipe) {
+		const recipes = {...this.state.recipes};
+		const timestamp = Date.now();
+		recipes[`recipe-${timestamp}`] = recipe;
+		this.setState({recipes});
 	}
 
-	renderRecipe() {
-		return <li>{this.props.recipes}</li>
+	onSave() {
+		this.setState({edit: false});
+		const recipe = {
+			recipe: this.recipe.value,
+			ingredients: this.ingredients.value.split(',')
+		}
+		this.addRecipe(recipe);
+	}
+
+	renderEdit() {
+		return (
+			<li className="list-group-item">
+				<div className="input-group">
+					<input 
+						ref={(input) => this.recipe = input} 
+						type="text" 
+						className="form-control" 
+						placeholder="Recipe"/>
+					<input 
+						ref={(input) => this.ingredients = input} 
+						type="text" 
+						className="form-control" 
+						placeholder="List ingredients separated by commas"/>
+					<button onClick={this.onSave} className="btn btn-success">Save</button>
+				</div>
+			</li>
+		);
 	}
 
 	renderRecipes() {
-		console.table(this.state.ingredients);
-		return this.state.recipes.map((item, index) => {
-			return this.state.ingredients.map((ing, j) => {
-				return (
-					<li className="list-group-item" key={index}>{item}
-						<ul>
-							<li key={j}>{ing}</li>
-						</ul>
-					</li>
-				);
-			})
-		});
+		return (
+			<ul>
+				{
+					Object
+					.keys(this.state.recipes)
+					.map(key => <Recipe onEdit={this.onEdit} key={key} details={this.state.recipes[key]} />)
+				}
+			</ul>
+		);
+	}
+
+
+	onEdit() {
+		this.setState({edit: true});
 	}
 
 	render() {
@@ -48,14 +92,14 @@ class RecipesContainer extends Component {
 				</div>
 				<div className="container">
 					<div className="well">
-						<ul className="list-group">
-							{this.renderRecipes()}
-						</ul>
+							{this.state.edit ? this.renderEdit() : this.renderRecipes()}
 					</div>
 				</div>
 			</div>
 		);
 	}
 }
+
+
 
 export default RecipesContainer;

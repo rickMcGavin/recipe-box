@@ -37,6 +37,18 @@ body {
   margin-top: 15px;
 }
 
+.btn-primary {
+  margin-bottom: 5px;
+}
+
 .btn-danger {
   margin-left: 5px;
+}
+
+.form-control {
+  margin-top: 5px;
+}
+
+.btn-success {
+  margin-top: 5px;
 }
