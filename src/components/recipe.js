@@ -1,11 +1,5 @@
 import React from 'react';
 
-				// {
-				// 	props.details.ingredients.map((ingredient, i) => {
-				// 		return <li key={i}>{ingredient}</li>
-				// 	})
-				// }
-
 const Recipe = (props) => {
 	return (
 			<li className="list-group-item">
