@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import Recipe from './recipe';
+import Recipe from './recipe';
 import RecipeForm from './recipe-form';
 
 class RecipesContainer extends Component {
@@ -33,7 +33,11 @@ class RecipesContainer extends Component {
 				<div className="container">
 					<div className="well">
 						<ul>
-						{this.state.edit && <li>Hello</li>}
+						{
+							Object
+								.keys(this.state.recipes)
+								.map(key => <Recipe key={key} details={this.state.recipes[key]} />)
+						}
 						</ul>
 					</div>
 				</div>

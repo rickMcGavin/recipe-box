@@ -13,7 +13,7 @@ class RecipeForm extends Component {
 		console.log('making recipe 🍔');
 		const recipe = {
 			name: this.name.value,
-			ingredient: this.ingredients.value.split(',')
+			ingredients: this.ingredients.value.split(',')
 		}
 		this.props.addRecipe(recipe);
 		this.recipeForm.reset();
