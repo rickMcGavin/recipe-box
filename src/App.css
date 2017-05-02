@@ -38,11 +38,15 @@ body {
 }
 
 .btn-primary {
-  margin-bottom: 5px;
+  margin-top: 5px;
 }
 
 .btn-danger {
   margin-left: 5px;
+}
+
+label {
+  margin-top: 5px;
 }
 
 .form-control {
