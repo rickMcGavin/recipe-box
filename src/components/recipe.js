@@ -1,24 +1,36 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-const Recipe = (props) => {
-	return (
+class Recipe extends Component {
+	constructor(props) {
+		super(props);
+		
+	}
+
+	render(){
+		console.log();
+		return (
 			<li className="list-group-item">
 				<h4>
-					{props.details.name}
+					{this.props.details.name}
 				</h4>
 				<ul>
 					{
-						props.details.ingredients.map((ingredient, i) => {
+						this.props.details.ingredients.map((ingredient, i) => {
 							return <li key={i}>{ingredient}</li>
 						})
 					}
 				</ul>
 				<div className="button-group">
-					<button onClick={props.onEdit} className="btn btn-warning">Edit</button>
-					<button className="btn btn-danger">Delete</button>
+					<button 
+						onClick={this.props.onEdit} 
+						className="btn btn-warning">Edit</button>
+					<button 
+						onClick={() => this.props.removeRecipe(this.props.recipeId)} 
+						className="btn btn-danger">Delete</button>
 				</div>
 			</li>
-	)
+		)
+	}
 }
 
 export default Recipe

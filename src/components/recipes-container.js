@@ -7,6 +7,7 @@ class RecipesContainer extends Component {
 		super(props);
 
 		this.addRecipe = this.addRecipe.bind(this);
+		this.removeRecipe = this.removeRecipe.bind(this);
 		
 		this.state = {
 			recipes: {},
@@ -24,6 +25,12 @@ class RecipesContainer extends Component {
 		this.setState({ recipes });
 	}
 
+	removeRecipe(key) {
+		const recipes = {...this.state.recipes};
+		delete recipes[key];
+		this.setState({ recipes });
+	}
+
 	render() {
 		return(
 			<div className="container">
@@ -36,7 +43,7 @@ class RecipesContainer extends Component {
 						{
 							Object
 								.keys(this.state.recipes)
-								.map(key => <Recipe key={key} details={this.state.recipes[key]} />)
+								.map(key => <Recipe key={key} recipeId={key} removeRecipe={this.removeRecipe} details={this.state.recipes[key]} />)
 						}
 						</ul>
 					</div>
