@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
 
 class Recipe extends Component {
-	constructor(props) {
-		super(props);
-		
-	}
 
 	render(){
-		console.log();
 		return (
 			<li className="list-group-item">
 				<h4>
