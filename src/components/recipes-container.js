@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import Recipe from './recipe';
 import RecipeForm from './recipe-form';
+import Modal from './modal';
 import EditForm from './edit-form';
+
 
 class RecipesContainer extends Component {
 	constructor(props) {
@@ -10,7 +12,7 @@ class RecipesContainer extends Component {
 		this.addRecipe = this.addRecipe.bind(this);
 		this.removeRecipe = this.removeRecipe.bind(this);
 		this.updateRecipe = this.updateRecipe.bind(this);
-		this.renderRecipe = this.renderRecipe.bind(this);
+		this.renderModal = this.renderModal.bind(this);
 		this.onEdit = this.onEdit.bind(this);
 		this.onSave = this.onSave.bind(this);
 		
@@ -18,6 +20,14 @@ class RecipesContainer extends Component {
 			recipes: {},
 			edit: false
 		};
+	}
+
+	onEdit() {
+		this.setState({ edit: true });
+	}
+
+	onSave() {
+		this.setState({ edit: false });
 	}
 
 	addRecipe(recipe) {
@@ -34,7 +44,6 @@ class RecipesContainer extends Component {
 		const recipes = {...this.state.recipes};
 		recipes[key] = updatedRecipe;
 		this.setState({ recipes });
-		this.setState({ edit: false });
 	}
 
 	removeRecipe(key) {
@@ -43,26 +52,24 @@ class RecipesContainer extends Component {
 		this.setState({ recipes });
 	}
 
-	onEdit() {
-		this.setState({edit: true});
-	}
-
-	onSave() {
-		this.setState({ edit: false });
-	}
-
-	renderRecipe(key) {
-			return <EditForm 
-								key={key} 
-								details={this.state.recipes[key]} 
-								onSave={this.onSave}
-								recipeId={key}
-								updateRecipe={this.updateRecipe}
-							/>
+	renderModal(key, details) {
+		const timestamp = Date.now();
+			return (
+				<Modal>
+					<EditForm
+						key={timestamp}
+						details={details}
+						recipeId={key}
+						updateRecipe={this.updateRecipe}
+				 />
+				</Modal>
+			)
 	}
 
 	render() {
 		return(
+
+			
 			<div className="container">
 				<div className="container">
 					<RecipeForm addRecipe={this.addRecipe}/>					
@@ -74,19 +81,32 @@ class RecipesContainer extends Component {
 							Object
 								.keys(this.state.recipes)
 								.map(key => {
-									return <Recipe 
-														key={key} 
-														details={this.state.recipes[key]} 
-														onEdit={this.onEdit}
-														recipeId={key} 
-														removeRecipe={this.removeRecipe} 
-													/>
+									const details = this.state.recipes[key];
+									const recipeId = key;
+									return <div key={key + 1}>
+										<Recipe 
+											key={key} 
+											details={details}
+											onEdit={this.onEdit}
+											onSave={this.onSave}
+											recipeId={recipeId} 
+											removeRecipe={this.removeRecipe} 
+											renderModal={this.renderModal}
+										/>
+										<div>
+											{
+												this.state.edit && 
+													this.renderModal(recipeId, details)
+											}
+										</div>
+									</div>
 								}
 							)
 						}
 						</ul>
 					</div>
 				</div>
+				
 			</div>
 		);
 	}

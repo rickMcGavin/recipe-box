@@ -56,3 +56,19 @@ label {
 .btn-success {
   margin-top: 5px;
 }
+
+.my-modal {
+  position: fixed;
+  top: 25%;
+  left: 20%;
+  right: 20%;
+  height: 40%;
+  border: 1px solid #ccc;
+  background: #fff;
+  overflow: auto;
+  border-radius: 4px;
+  outline: none;
+  padding: 20px;
+  display: block;
+  z-index: 2;
+}
