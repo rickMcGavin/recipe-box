@@ -32,7 +32,7 @@ class EditForm extends Component {
 						onChange={(e) => this.handleChange(e, this.props.recipeId)}
 						ref={(input) => this.name = input}
 						type="text" 
-						value={this.props.details.name}/>
+						defaultValue={this.props.details.name}/>
 					<label htmlFor="ingredients">Ingredients</label>
 					<input 
 						className="form-control" 
@@ -41,7 +41,7 @@ class EditForm extends Component {
 						onChange={(e) => this.handleChange(e, this.props.recipeId)}
 						name="ingredients"
 						type="text" 
-						value={this.props.details.ingredients.join(',')}/>
+						defaultValue={this.props.details.ingredients}/>
 					<button 
 						onClick={this.props.onSave}
 						className="btn btn-success">Save

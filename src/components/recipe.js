@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
 
 class Recipe extends Component {
-	constructor(props) {
-		super(props);
-		
-	}
 
 	render(){
-		console.log(this.props.details);
+		// console.log(this.props.details);
 		return (
 			<div>
 				<li className="list-group-item">
