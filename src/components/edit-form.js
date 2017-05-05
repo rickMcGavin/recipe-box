@@ -13,7 +13,7 @@ class EditForm extends Component {
 		const recipe = this.props.details[key];
 		const updatedRecipe = {
 			...recipe,
-			[e.target.name]: e.target.value,
+			[e.target.name]: e.target.value
 		}
 		this.props.updateRecipe(key, updatedRecipe);
 	}

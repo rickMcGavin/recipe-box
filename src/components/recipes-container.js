@@ -41,7 +41,9 @@ class RecipesContainer extends Component {
 	}
 
 	updateRecipe(key, updatedRecipe) {
-		const recipes = {...this.state.recipes};
+		// console.log(this.state.recipes[key].ingredients);
+		const recipes = {...this.state.recipes, ...this.state.recipes[key].ingredients};
+		console.log(recipes[key]);
 		recipes[key] = updatedRecipe;
 		this.setState({ recipes });
 	}
@@ -53,12 +55,11 @@ class RecipesContainer extends Component {
 	}
 
 	renderModal(key, details) {
-		const timestamp = Date.now();
 			return (
 				<Modal>
 					<EditForm
-						key={timestamp}
-						details={details}
+						key={key}
+						details={this.state.recipes[key]}
 						recipeId={key}
 						updateRecipe={this.updateRecipe}
 				 />
@@ -82,6 +83,8 @@ class RecipesContainer extends Component {
 								.keys(this.state.recipes)
 								.map(key => {
 									const details = this.state.recipes[key];
+									console.log('details:');
+									console.log(details);
 									const recipeId = key;
 									return <div key={key + 1}>
 										<Recipe 
