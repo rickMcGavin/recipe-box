@@ -72,3 +72,13 @@ label {
   display: block;
   z-index: 2;
 }
+
+.recipe-container {
+  display: flex;
+  width: 100%;
+}
+
+.recipe,
+.recipe-form {
+  width: 40%;
+}

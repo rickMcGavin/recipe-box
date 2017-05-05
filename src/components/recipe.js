@@ -3,9 +3,8 @@ import React, { Component } from 'react';
 class Recipe extends Component {
 
 	render(){
-		// console.log(this.props.details);
 		return (
-			<div>
+			<div className="recipe">
 				<li className="list-group-item">
 					<h4>
 						{this.props.details.name}

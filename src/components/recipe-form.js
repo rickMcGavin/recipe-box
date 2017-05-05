@@ -9,6 +9,7 @@ class RecipeForm extends Component {
 	}
 
 	createRecipe(e) {
+		debugger;
 		e.preventDefault();
 		console.log('making recipe 🍔');
 		const recipe = {

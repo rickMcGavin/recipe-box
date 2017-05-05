@@ -25,11 +25,13 @@ class RecipesContainer extends Component {
 		this.setState({ edit: true });
 	}
 
-	onSave() {
+	onSave(e) {
+		e.preventDefault();
 		this.setState({ edit: false });
 	}
 
 	addRecipe(recipe) {
+		debugger;
 		// update state
 		// copies existing state and puts it in new const
 		const recipes = {...this.state.recipes}; 
@@ -40,7 +42,7 @@ class RecipesContainer extends Component {
 	}
 
 	updateRecipe(key, updatedRecipe) {
-		const recipes = {...this.state.recipes, ...this.state.recipes[key].ingredients};
+		const recipes = { ...this.state.recipes, ...this.state.recipes[key].ingredients };
 		recipes[key] = updatedRecipe;
 		this.setState({ recipes });
 	}
@@ -52,37 +54,29 @@ class RecipesContainer extends Component {
 	}
 
 	renderRecipe(key) {
-		if (this.state.edit) {
-			console.log('Edit: ');
-			console.log(this.state.recipes[key]);
-			return (
+		const recipeKey = `${key}-r`;
+		const divKey = `${key}-div`;
+		console.log(this.state.recipes[key]);
+		return (
+			<div className="recipe-container" key={divKey}>
 				<EditForm
 						key={key}
 						details={this.state.recipes[key]}
 						recipeId={key}
-						updateRecipe={this.updateRecipe}
-				 />
-				)
-		} else {
-			console.log('Recipe: ');
-			console.log(this.state.recipes[key]);
-			return (
+						updateRecipe={this.updateRecipe}/>
 				<Recipe 
 					details={this.state.recipes[key]}
-					key={key} 
+					key={recipeKey} 
 					onEdit={this.onEdit}
 					onSave={this.onSave}
 					recipeId={key} 
-					removeRecipe={this.removeRecipe} 
-					renderModal={this.renderModal}
-				/>
-			)
-		}
+					removeRecipe={this.removeRecipe}/>
+			</div>
+		)
 	}
 
 	render() {
 		return(
-
 			<div className="container">
 				<div className="container">
 					<RecipeForm addRecipe={this.addRecipe}/>					

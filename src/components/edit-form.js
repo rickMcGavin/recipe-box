@@ -10,7 +10,9 @@ class EditForm extends Component {
 
 	handleChange(e, key) {
 		e.preventDefault();
-		const recipe = this.props.details[key];
+		debugger;
+		const recipe = this.props.details;
+		console.log(this.props.details);
 		const updatedRecipe = {
 			...recipe,
 			[e.target.name]: e.target.value
@@ -22,32 +24,34 @@ class EditForm extends Component {
 
 	render() {
 		return(
-			<form ref={(input) => this.recipeForm = input}>
-				<div className="form-group">
-					<label htmlFor="recipeName">Recipe Name</label>
-					<input 
-						className="form-control" 
-						id="recipeName" 
-						name="name"
-						onChange={(e) => this.handleChange(e, this.props.recipeId)}
-						ref={(input) => this.name = input}
-						type="text" 
-						defaultValue={this.props.details.name}/>
-					<label htmlFor="ingredients">Ingredients</label>
-					<input 
-						className="form-control" 
-						id="ingredients" 
-						ref={(input) => this.ingredients = input}
-						onChange={(e) => this.handleChange(e, this.props.recipeId)}
-						name="ingredients"
-						type="text" 
-						defaultValue={this.props.details.ingredients}/>
-					<button 
-						onClick={this.props.onSave}
-						className="btn btn-success">Save
-					</button>
-				</div>
-			</form>
+			<div className="recipe-form">
+				<form ref={(input) => this.recipeForm = input}>
+					<div className="form-group">
+						<label htmlFor="recipeName">Recipe Name</label>
+						<input 
+							className="form-control" 
+							id="recipeName" 
+							name="name"
+							onChange={(e) => this.handleChange(e, this.props.recipeId)}
+							ref={(input) => this.name = input}
+							type="text" 
+							defaultValue={this.props.details.name}/>
+						<label htmlFor="ingredients">Ingredients</label>
+						<input 
+							className="form-control" 
+							id="ingredients" 
+							ref={(input) => this.ingredients = input}
+							onChange={(e) => this.handleChange(e, this.props.recipeId)}
+							name="ingredients"
+							type="text" 
+							defaultValue={this.props.details.ingredients}/>
+						<button 
+							onClick={(e) => this.props.onSave(e)}
+							className="btn btn-success">Save
+						</button>
+					</div>
+				</form>
+			</div>
 		)
 	}
 }
