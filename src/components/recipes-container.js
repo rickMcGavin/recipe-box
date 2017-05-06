@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import Recipe from './recipe';
-import RecipeForm from './recipe-form';
-import EditForm from './edit-form';
-
 
 class RecipesContainer extends Component {
 	constructor(props) {
@@ -11,32 +8,20 @@ class RecipesContainer extends Component {
 		this.addRecipe = this.addRecipe.bind(this);
 		this.removeRecipe = this.removeRecipe.bind(this);
 		this.updateRecipe = this.updateRecipe.bind(this);
-		this.renderRecipe = this.renderRecipe.bind(this);
-		this.changeHide = this.changeHide.bind(this);
-		this.onEdit = this.onEdit.bind(this);
-		this.onSave = this.onSave.bind(this);
+		this.createRecipe = this.createRecipe.bind(this);
 
 		this.state = {
 			recipes: {},
-			edit: true,
-			visible: 'hide'
 		};
 	}
 
-	onEdit() {
-		this.setState({ edit: true });
-	}
-
-	onSave(e) {
-		e.preventDefault();
-		this.setState({ edit: false });
-	}
-
-	changeHide() {
-		this.state.visible === 'hide' ?
-			this.setState({ visible: 'show' })
-		:
-			this.setState({ visible: 'hide' })
+	createRecipe(e) {
+		console.log('making recipe 🍔');
+		const recipe = {
+			name: '',
+			ingredients: ''
+		}
+		this.addRecipe(recipe);
 	}
 
 	addRecipe(recipe) {
@@ -61,35 +46,14 @@ class RecipesContainer extends Component {
 		this.setState({ recipes });
 	}
 
-	renderRecipe(key) {
-		const recipeKey = `${key}-r`;
-		// const divKey = `${key}-div`;
-		if (this.state.edit) {
-			return <EditForm
-						key={key}
-						details={this.state.recipes[key]}
-						onSave={this.onSave}
-						recipeId={key}
-						updateRecipe={this.updateRecipe}/>
-				} else {
-					return <Recipe
-						changeHide={this.changeHide}
-						details={this.state.recipes[key]}
-						hide={this.state.hide}
-						key={recipeKey}
-						onEdit={this.onEdit}
-						onSave={this.onSave}
-						recipeId={key}
-						removeRecipe={this.removeRecipe}
-						visible={this.state.visible}/>
-			}
-	}
-
 	render() {
 		return(
 			<div className="container">
 				<div className="container">
-					<RecipeForm addRecipe={this.addRecipe}/>
+					<button
+						onClick={this.createRecipe}
+						className="btn btn-primary">+ Add Recipe
+					</button>
 				</div>
 				<div className="container">
 					<div className="well">
@@ -97,12 +61,19 @@ class RecipesContainer extends Component {
 						{
 							Object
 								.keys(this.state.recipes)
-								.map(key => this.renderRecipe(key))
-						}
+								.map(key => {
+									return <Recipe
+										details={this.state.recipes[key]}
+										hide={this.state.hide}
+										key={key}
+										recipeId={key}
+										removeRecipe={this.removeRecipe}
+										updateRecipe={this.updateRecipe}/>
+								})
+							}	
 						</ul>
 					</div>
 				</div>
-
 			</div>
 		);
 	}
