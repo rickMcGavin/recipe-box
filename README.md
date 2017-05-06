@@ -6,11 +6,11 @@ Fulfill the below user stories. Use whichever libraries or APIs you need. Give i
 
 - [x] User Story: I can create recipes that have names and ingredients.
 
-- [ ] User Story: I can see an index view where the names of all the recipes are visible.
+- [x] User Story: I can see an index view where the names of all the recipes are visible.
 
-- [ ] User Story: I can click into any of those recipes to view it.
+- [x] User Story: I can click into any of those recipes to view it.
 
-- [ ] User Story: I can edit these recipes.
+- [x] User Story: I can edit these recipes.
 
 - [X] User Story: I can delete these recipes.
 

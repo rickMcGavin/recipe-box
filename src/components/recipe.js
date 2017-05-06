@@ -6,22 +6,22 @@ class Recipe extends Component {
 		return (
 			<div className="recipe">
 				<li className="list-group-item">
-					<h4>
+					<h4 onClick={this.props.changeHide}>
 						{this.props.details.name}
 					</h4>
-					<ul>
+					<ul className={this.props.visible}>
 						{
-							this.props.details.ingredients.map((ingredient, i) => {
+							this.props.details.ingredients.split(',').map((ingredient, i) => {
 								return <li key={i}>{ingredient}</li>
 							})
 						}
 					</ul>
 					<div className="button-group">
-						<button 
-							onClick={() => this.props.onEdit()} 
+						<button
+							onClick={() => this.props.onEdit()}
 							className="btn btn-warning">Edit</button>
-						<button 
-							onClick={() => this.props.removeRecipe(this.props.recipeId)} 
+						<button
+							onClick={() => this.props.removeRecipe(this.props.recipeId)}
 							className="btn btn-danger">Delete</button>
 					</div>
 				</li>

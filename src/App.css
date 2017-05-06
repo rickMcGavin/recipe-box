@@ -2,6 +2,10 @@ body {
   padding-top: 100px;
 }
 
+input[type=text] {
+  background-color: #d3d3d3;
+}
+
 .page-header {
   background: #333;
   color: #fff;
@@ -19,6 +23,10 @@ body {
 
 .list-group {
   min-height: 200px;
+}
+
+.list-group-item {
+  margin-top: 10px;
 }
 
 .footer {
@@ -57,28 +65,17 @@ label {
   margin-top: 5px;
 }
 
-.my-modal {
-  position: fixed;
-  top: 25%;
-  left: 20%;
-  right: 20%;
-  height: 40%;
-  border: 1px solid #ccc;
-  background: #fff;
-  overflow: auto;
-  border-radius: 4px;
-  outline: none;
-  padding: 20px;
+h4 {
+  border-bottom: 1px solid transparent;
+  color: #86af49;
+  cursor: pointer;
+  width: fit-content;
+}
+
+h4:hover {
+  border-bottom: 1px solid #86af49;
+}
+
+.show {
   display: block;
-  z-index: 2;
-}
-
-.recipe-container {
-  display: flex;
-  width: 100%;
-}
-
-.recipe,
-.recipe-form {
-  width: 40%;
 }

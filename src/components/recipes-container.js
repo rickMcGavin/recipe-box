@@ -12,12 +12,14 @@ class RecipesContainer extends Component {
 		this.removeRecipe = this.removeRecipe.bind(this);
 		this.updateRecipe = this.updateRecipe.bind(this);
 		this.renderRecipe = this.renderRecipe.bind(this);
+		this.changeHide = this.changeHide.bind(this);
 		this.onEdit = this.onEdit.bind(this);
 		this.onSave = this.onSave.bind(this);
-		
+
 		this.state = {
 			recipes: {},
-			edit: false
+			edit: true,
+			visible: 'hide'
 		};
 	}
 
@@ -30,11 +32,17 @@ class RecipesContainer extends Component {
 		this.setState({ edit: false });
 	}
 
+	changeHide() {
+		this.state.visible === 'hide' ?
+			this.setState({ visible: 'show' })
+		:
+			this.setState({ visible: 'hide' })
+	}
+
 	addRecipe(recipe) {
-		debugger;
 		// update state
 		// copies existing state and puts it in new const
-		const recipes = {...this.state.recipes}; 
+		const recipes = {...this.state.recipes};
 		const timestamp = Date.now();
 		recipes[`recipe-${timestamp}`] = recipe;
 		// set state
@@ -42,7 +50,7 @@ class RecipesContainer extends Component {
 	}
 
 	updateRecipe(key, updatedRecipe) {
-		const recipes = { ...this.state.recipes, ...this.state.recipes[key].ingredients };
+		const recipes = { ...this.state.recipes };
 		recipes[key] = updatedRecipe;
 		this.setState({ recipes });
 	}
@@ -55,31 +63,33 @@ class RecipesContainer extends Component {
 
 	renderRecipe(key) {
 		const recipeKey = `${key}-r`;
-		const divKey = `${key}-div`;
-		console.log(this.state.recipes[key]);
-		return (
-			<div className="recipe-container" key={divKey}>
-				<EditForm
+		// const divKey = `${key}-div`;
+		if (this.state.edit) {
+			return <EditForm
 						key={key}
 						details={this.state.recipes[key]}
+						onSave={this.onSave}
 						recipeId={key}
 						updateRecipe={this.updateRecipe}/>
-				<Recipe 
-					details={this.state.recipes[key]}
-					key={recipeKey} 
-					onEdit={this.onEdit}
-					onSave={this.onSave}
-					recipeId={key} 
-					removeRecipe={this.removeRecipe}/>
-			</div>
-		)
+				} else {
+					return <Recipe
+						changeHide={this.changeHide}
+						details={this.state.recipes[key]}
+						hide={this.state.hide}
+						key={recipeKey}
+						onEdit={this.onEdit}
+						onSave={this.onSave}
+						recipeId={key}
+						removeRecipe={this.removeRecipe}
+						visible={this.state.visible}/>
+			}
 	}
 
 	render() {
 		return(
 			<div className="container">
 				<div className="container">
-					<RecipeForm addRecipe={this.addRecipe}/>					
+					<RecipeForm addRecipe={this.addRecipe}/>
 				</div>
 				<div className="container">
 					<div className="well">
@@ -92,7 +102,7 @@ class RecipesContainer extends Component {
 						</ul>
 					</div>
 				</div>
-				
+
 			</div>
 		);
 	}
