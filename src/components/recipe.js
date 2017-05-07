@@ -16,11 +16,11 @@ class Recipe extends Component {
 		}
 	}
 
-	componentDidMount() {
+	componentWillMount() {
 		// console.log(this.props.details.name);
 		// console.log(this.props.local[this.props.recipeId]);
 
-		 if (this.props.local[this.props.recipeId].name) {
+		 if (this.props.local[this.props.recipeId]) {
 			this.setState({edit: false});
 		} 
 	}
