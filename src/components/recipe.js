@@ -20,7 +20,7 @@ class Recipe extends Component {
 		// console.log(this.props.details.name);
 		// console.log(this.props.local[this.props.recipeId]);
 
-		if (this.props.local[this.props.recipeId].name) {
+		 if (this.props.local[this.props.recipeId].name) {
 			this.setState({edit: false});
 		} 
 	}
@@ -113,7 +113,7 @@ class Recipe extends Component {
 	}
 
 	render(){
-		 
+		
 		 	if (this.state.edit) {
 		 		return this.renderEdit(); 
  			} else {
