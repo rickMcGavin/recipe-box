@@ -17,9 +17,6 @@ class Recipe extends Component {
 	}
 
 	componentWillMount() {
-		// console.log(this.props.details.name);
-		// console.log(this.props.local[this.props.recipeId]);
-
 		 if (this.props.local[this.props.recipeId]) {
 			this.setState({edit: false});
 		} 
