@@ -26,6 +26,8 @@ class RecipesContainer extends Component {
 				return localStorageRef[key] = JSON.parse(localStorage.getItem(key));
 			});
 
+		// check if there is any data in local storage
+		// if there is, set it state	
 		if (localStorageRef) {
 			this.setState({
 				recipes: localStorageRef
