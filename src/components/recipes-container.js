@@ -12,6 +12,7 @@ class RecipesContainer extends Component {
 
 		this.state = {
 			recipes: {},
+			local: {}
 		};
 	}
 
@@ -27,10 +28,11 @@ class RecipesContainer extends Component {
 			});
 
 		// check if there is any data in local storage
-		// if there is, set it state	
+		// if there is, set it to state	
 		if (localStorageRef) {
 			this.setState({
-				recipes: localStorageRef
+				recipes: localStorageRef,
+				local: localStorageRef
 			});
 		}
 	}
@@ -85,6 +87,7 @@ class RecipesContainer extends Component {
 								.map(key => {
 									return <Recipe
 										details={this.state.recipes[key]}
+										local={this.state.local}
 										hide={this.state.hide}
 										key={key}
 										recipeId={key}

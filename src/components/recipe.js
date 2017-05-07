@@ -16,8 +16,13 @@ class Recipe extends Component {
 		}
 	}
 
-	componentWillMount() {
-		//
+	componentDidMount() {
+		// console.log(this.props.details.name);
+		// console.log(this.props.local[this.props.recipeId]);
+
+		if (this.props.local[this.props.recipeId].name) {
+			this.setState({edit: false});
+		} 
 	}
 
 	onEdit() {
