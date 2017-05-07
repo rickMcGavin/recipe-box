@@ -6,6 +6,10 @@ input[type=text] {
   background-color: #d3d3d3;
 }
 
+input[type=text]::placeholder {
+  color: #2b2b2b;
+}
+
 .page-header {
   background: #333;
   color: #fff;

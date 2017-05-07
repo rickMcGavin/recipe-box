@@ -11,12 +11,14 @@ class Recipe extends Component {
 		this.onSave = this.onSave.bind(this);
 
 		this.state = {
-			visible: 'show',
+			visible: 'hide',
 			edit: true
 		}
 	}
 
-
+	componentWillMount() {
+		//
+	}
 
 	onEdit() {
 		this.setState({ edit: true });
@@ -56,7 +58,8 @@ class Recipe extends Component {
 							onChange={(e) => this.handleChange(e, this.props.recipeId)}
 							ref={(input) => this.name = input}
 							type="text"
-							defaultValue={this.props.details.name}/>
+							defaultValue={this.props.details.name}
+							placeholder="Enter the name of your recipe"/>
 						<label htmlFor="ingredients">Ingredients</label>
 						<input
 							className="form-control"
@@ -65,7 +68,8 @@ class Recipe extends Component {
 							onChange={(e) => this.handleChange(e, this.props.recipeId)}
 							name="ingredients"
 							type="text"
-							defaultValue={this.props.details.ingredients}/>
+							defaultValue={this.props.details.ingredients}
+							placeholder="Enter ingredients separated by commas"/>
 					</div>
 				</form>
 				<button

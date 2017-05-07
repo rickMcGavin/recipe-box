@@ -15,6 +15,24 @@ class RecipesContainer extends Component {
 		};
 	}
 
+	componentWillMount() {
+		// set an empty object to localStorageRef
+		const localStorageRef = {};
+		// loop through the keys in the localStorage using Object.keys
+ 		Object
+			.keys(localStorage)
+			.map(key => {
+				// add the key/value pair to localStorageRef 
+				return localStorageRef[key] = JSON.parse(localStorage.getItem(key));
+			});
+
+		if (localStorageRef) {
+			this.setState({
+				recipes: localStorageRef
+			});
+		}
+	}
+
 	createRecipe(e) {
 		console.log('making recipe 🍔');
 		const recipe = {
@@ -37,6 +55,7 @@ class RecipesContainer extends Component {
 	updateRecipe(key, updatedRecipe) {
 		const recipes = { ...this.state.recipes };
 		recipes[key] = updatedRecipe;
+		localStorage.setItem(`${key}`, JSON.stringify(recipes[key]));
 		this.setState({ recipes });
 	}
 

@@ -14,7 +14,7 @@ Fulfill the below user stories. Use whichever libraries or APIs you need. Give i
 
 - [X] User Story: I can delete these recipes.
 
-- [ ] User Story: All new recipes I add are saved in my browser's local storage. If I refresh the page, these recipes will still be there.
+- [x] User Story: All new recipes I add are saved in my browser's local storage. If I refresh the page, these recipes will still be there.
 
 Hint: You should prefix your local storage keys on CodePen, i.e. _username_recipes
 
