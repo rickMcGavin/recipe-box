@@ -65,6 +65,7 @@ class RecipesContainer extends Component {
 
 	removeRecipe(key) {
 		const recipes = {...this.state.recipes};
+		localStorage.removeItem(key);
 		delete recipes[key];
 		this.setState({ recipes });
 	}
